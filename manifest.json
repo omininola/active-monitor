@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "active_monitor",
+  "name": "",
+  "version": "1.0.0",
+  "author": "Otavio Miklos",
+  "description": "Shows the active monitor.",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Monitor name.",
+    "description": "If the monitor is currently focused, a small dot is going to appear by its side :D",
+    "category": "CoolDots",
+    "allowMultiple": false
+  }
+}
