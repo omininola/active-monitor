@@ -1,18 +1,41 @@
 import QtQuick
 import Quickshell.Hyprland
 import qs.Ui
+import qs.Commons
+import qs.Commons as Commons
 
 BarWidget {
   id: root
   moduleName: "active_monitor"
 
-  implicitWidth: text.implicitWidth
-  implicitHeight: text.implicitHeight
+  implicitWidth: label.implicitWidth
+  implicitHeight: root.barSize
 
-  WidgetButton {
-    id: text
-    anchors.fill: parent
-    bar: root.bar
-    text: Hyprland.focusedMonitor.name == Screen.name ? " " + Screen.name : "  " + Screen.name
+  readonly property string icon: ""
+  readonly property int spacing: 4
+
+  Row {
+    id: label
+    anchors.centerIn: parent
+    spacing: root.spacing
+
+    Loader {
+      active: (Hyprland.focusedMonitor.name === Screen.name)
+      sourceComponent: Component {
+        Text {
+          text: root.icon
+          color: root.bar.barForeground
+          font.family: root.bar ? root.bar.fontFamily : Style.font.family
+          font.pixelSize: Style.font.body
+        }
+      }
+    }
+
+    Text {
+      text: Screen.name
+      color: root.bar.barForeground
+      font.family: root.bar ? root.bar.fontFamily : Style.font.family
+      font.pixelSize: Style.font.body
+    }
   }
 }
